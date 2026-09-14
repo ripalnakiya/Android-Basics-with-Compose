@@ -16,7 +16,10 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             SuperheroesTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                Scaffold(
+                    modifier = Modifier.fillMaxSize(),
+                    topBar = { SuperheroTopbar() }
+                ) { innerPadding ->
                     SuperherosApp(
                         modifier = Modifier.padding(innerPadding)
                     )

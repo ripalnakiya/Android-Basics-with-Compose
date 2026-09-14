@@ -3,31 +3,25 @@ package com.ripalnakiya.superheroes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults.elevatedCardElevation
-import androidx.compose.material3.CardElevation
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ElevatedCard
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
@@ -39,12 +33,26 @@ import com.ripalnakiya.superheroes.model.Hero
 import com.ripalnakiya.superheroes.model.HeroesRepository
 import com.ripalnakiya.superheroes.ui.theme.SuperheroesTheme
 
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun SuperheroTopbar(modifier: Modifier = Modifier) {
+    CenterAlignedTopAppBar(
+        title = {
+            Text(
+                text = stringResource(R.string.app_name),
+                style = MaterialTheme.typography.displayLarge
+            )
+        },
+        modifier = modifier
+    )
+}
+
 @Composable
 fun SuperherosApp(modifier: Modifier = Modifier) {
     LazyColumn(
         modifier = modifier,
         contentPadding = PaddingValues(horizontal = 16.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         items(HeroesRepository.heroes) { hero ->
             HeroItem(hero)
@@ -55,19 +63,17 @@ fun SuperherosApp(modifier: Modifier = Modifier) {
 @Composable
 fun HeroItem(hero: Hero, modifier: Modifier = Modifier) {
     ElevatedCard(
-        modifier = modifier
-            .clip(RoundedCornerShape(16.dp)),
+        modifier = modifier.clip(RoundedCornerShape(16.dp)),
         elevation = elevatedCardElevation(defaultElevation = 2.dp),
     ) {
         Row (
             modifier = Modifier
                 .fillMaxWidth()
                 .background(color = MaterialTheme.colorScheme.secondaryContainer)
+                .sizeIn(minHeight = 72.dp)
                 .padding(16.dp),
         ) {
-            Column (
-                modifier = Modifier.weight(1f)
-            ) {
+            Column (modifier = Modifier.weight(1f)) {
                 Text(
                     text = stringResource(hero.nameRes),
                     style = MaterialTheme.typography.displaySmall,
@@ -94,7 +100,10 @@ fun HeroItem(hero: Hero, modifier: Modifier = Modifier) {
 @Composable
 fun SuperheroesPreview() {
     SuperheroesTheme {
-        Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+        Scaffold(
+            modifier = Modifier.fillMaxSize(),
+            topBar = { SuperheroTopbar() }
+        ) { innerPadding ->
             SuperherosApp(
                 modifier = Modifier.padding(innerPadding)
             )
@@ -106,7 +115,10 @@ fun SuperheroesPreview() {
 @Composable
 fun SuperheroesDarkPreview() {
     SuperheroesTheme(darkTheme = true) {
-        Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+        Scaffold(
+            modifier = Modifier.fillMaxSize(),
+            topBar = { SuperheroTopbar() }
+        ) { innerPadding ->
             SuperherosApp(
                 modifier = Modifier.padding(innerPadding)
             )
