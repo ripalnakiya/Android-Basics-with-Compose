@@ -89,6 +89,6 @@ fun GreetingImage(message: String, from: String, modifier: Modifier = Modifier) 
 @Composable
 fun GreetingPreview() {
     HappyBirthdayTheme {
-        GreetingImage(message = "Happy Birthday Pengu!", from = "From Kanu")
+        GreetingImage(message = "Happy Birthday Abc!", from = "From Xyz")
     }
 }
