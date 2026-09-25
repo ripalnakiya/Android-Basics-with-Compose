@@ -44,7 +44,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun DiceImageAndButton(modifier: Modifier = Modifier) {
-    // A composable that reads observable Compose state can be recomposed when that state changes.
+    // A composable that reads observable Compose state, can be recomposed when that state changes.
     var result by remember { mutableIntStateOf(1) }
 
     val imageResource = when (result) {
