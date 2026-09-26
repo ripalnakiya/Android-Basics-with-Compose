@@ -1,4 +1,4 @@
-# Unscramble
+# Cupcake
 
 - Learnt to use [Navigation with Jetpack Compose](https://developer.android.com/codelabs/basic-android-kotlin-compose-navigation)
 - Implement **Next**, **Cancel** and **Back** navigation
