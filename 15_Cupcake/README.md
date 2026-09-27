@@ -5,6 +5,7 @@
 - Reuse custom Composables and Screens for different use-cases
 - Use **Up button** to navigate to previous screen
 - Wrote [Instrumentation tests for Navigation and Compose Screens](https://developer.android.com/codelabs/basic-android-kotlin-compose-test-cupcake)
+    - Wrote test rule extension functions
 
 > Used `TopAppBar` that makes status-bar insets as part of the app
 
