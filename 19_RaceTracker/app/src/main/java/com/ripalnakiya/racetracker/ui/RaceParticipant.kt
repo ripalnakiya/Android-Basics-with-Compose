@@ -1,8 +1,11 @@
 package com.ripalnakiya.racetracker.ui
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.setValue
+import kotlinx.coroutines.delay
+import kotlin.time.Duration.Companion.milliseconds
 
 /**
  * This class represents a state holder for race participant.
@@ -24,6 +27,13 @@ class RaceParticipant(
      */
     var currentProgress by mutableIntStateOf(initialProgress)
         private set
+
+    suspend fun run() {
+        while (currentProgress < maxProgress) {
+            delay(progressDelayMillis.milliseconds)
+            currentProgress += progressIncrement
+        }
+    }
 
     /**
      * Regardless of the value of [initialProgress]

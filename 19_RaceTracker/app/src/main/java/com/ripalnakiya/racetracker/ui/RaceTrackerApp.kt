@@ -1,5 +1,6 @@
 package com.ripalnakiya.racetracker.ui
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -21,6 +22,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -36,6 +38,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.ripalnakiya.racetracker.R
 import com.ripalnakiya.racetracker.ui.theme.RaceTrackerTheme
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
+import kotlin.coroutines.cancellation.CancellationException
+
+private const val TAG = "RaceTrackerApp"
 
 @Composable
 fun RaceTrackerApp() {
@@ -51,6 +58,22 @@ fun RaceTrackerApp() {
         RaceParticipant(name = "Player 2", progressIncrement = 2)
     }
     var raceInProgress by remember { mutableStateOf(false) }
+
+    if (raceInProgress) {
+        LaunchedEffect(playerOne, playerTwo) {
+            try {
+                Log.d(TAG, "RaceTrackerApp: Started")
+                coroutineScope {
+                    launch { playerOne.run() }
+                    launch { playerTwo.run() }
+                }
+                raceInProgress = false
+            } catch (e: CancellationException) {
+                Log.d(TAG, "RaceTrackerApp: $e")
+                throw e // Always re-throw CancellationException
+            }
+        }
+    }
 
     RaceTrackerScreen(
         playerOne = playerOne,
