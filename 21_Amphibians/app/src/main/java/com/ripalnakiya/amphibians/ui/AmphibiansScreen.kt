@@ -19,6 +19,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -46,7 +47,7 @@ fun AmphibiansApp() {
         },
         modifier = Modifier.fillMaxSize()
     ) { innerPadding ->
-        val viewModel: AmphibiansViewModel = viewModel()
+        val viewModel: AmphibiansViewModel = viewModel(factory = AmphibiansViewModel.Factory)
 
         when(val amphibianUiState = viewModel.amphibianUiState) {
             is AmphibianUiState.Loading -> AmphibianNotAvailable(R.drawable.ic_loading, R.string.loading,)
@@ -60,7 +61,10 @@ fun AmphibiansApp() {
 @Composable
 fun AmphibiansTopAppBar() {
     TopAppBar(
-        title = { Text(text = stringResource(R.string.app_name)) }
+        title = { Text(text = stringResource(R.string.app_name)) },
+        colors = TopAppBarDefaults.topAppBarColors(
+            containerColor = MaterialTheme.colorScheme.primaryContainer
+        ),
     )
 }
 
@@ -105,17 +109,16 @@ fun AmphibianItem(
     modifier: Modifier = Modifier,
 ) {
     Card(
-        modifier = modifier,
+        modifier = modifier.padding(16.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
     ) {
         Column(
-            modifier = Modifier
-                .background(Color(183, 236, 185, 255))
-                .padding(8.dp)
+            modifier = Modifier.background(Color(183, 236, 185, 255))
         ) {
             Text(
                 text = stringResource(R.string.item_heading, amphibian.name, amphibian.type),
-                style = MaterialTheme.typography.headlineMedium,
+                style = MaterialTheme.typography.headlineSmall,
+                modifier = modifier.padding(16.dp),
             )
             AsyncImage(
                 model = ImageRequest.Builder(context = LocalContext.current)
@@ -126,11 +129,12 @@ fun AmphibianItem(
                 error = painterResource(R.drawable.ic_error),
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
-                modifier = Modifier.fillMaxWidth().aspectRatio(1f)
+                modifier = Modifier.fillMaxWidth().aspectRatio(1.5f)
             )
             Text(
                 text = amphibian.description,
-                style = MaterialTheme.typography.bodyLarge
+                style = MaterialTheme.typography.bodySmall,
+                modifier = modifier.padding(16.dp),
             )
         }
     }
