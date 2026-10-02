@@ -122,7 +122,8 @@ fun AmphibianItem(
         ) {
             Text(
                 text = stringResource(R.string.item_heading, amphibian.name, amphibian.type),
-                style = MaterialTheme.typography.headlineSmall,
+                style = MaterialTheme.typography.titleLarge,
+                fontWeight = FontWeight.Bold,
                 modifier = modifier.padding(16.dp),
             )
             AsyncImage(
@@ -133,12 +134,13 @@ fun AmphibianItem(
                 placeholder = painterResource(R.drawable.ic_loading),
                 error = painterResource(R.drawable.ic_error),
                 contentDescription = null,
-                contentScale = ContentScale.Crop,
-                modifier = Modifier.fillMaxWidth().aspectRatio(1.5f)
+                contentScale = ContentScale.FillWidth,
+                modifier = Modifier.fillMaxWidth()
             )
             Text(
                 text = amphibian.description,
-                style = MaterialTheme.typography.bodySmall,
+                style = MaterialTheme.typography.titleMedium,
+                textAlign = TextAlign.Justify,
                 modifier = modifier.padding(16.dp),
             )
         }
