@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Amphibians</string>
+    <string name="loading">Loading…</string>
+    <string name="error">Error in fetching data :(</string>
+    <string name="item_heading">%1$s (%2$s)</string>
+
+    <string name="placeholder_amphibian_name">Great Basin Spadefoot</string>
+    <string name="placeholder_amphibian_type">Toad</string>
+    <string name="placeholder_amphibian_description">This toad spends most of its life underground due to the arid desert conditions in which it lives. Spadefoot toads earn the name because of their hind legs which are wedged to aid in digging. They are typically grey, green, or brown with dark spots.</string>
 </resources>
