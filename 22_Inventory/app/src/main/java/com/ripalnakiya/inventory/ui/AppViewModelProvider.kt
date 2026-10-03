@@ -29,7 +29,10 @@ object AppViewModelProvider {
 
         // Initializer for ItemDetailsViewModel
         initializer {
-            ItemDetailsViewModel(this.createSavedStateHandle())
+            ItemDetailsViewModel(
+                this.createSavedStateHandle(),
+                inventoryApplication().container.itemsRepository
+            )
         }
 
         // Initializer for HomeViewModel
