@@ -4,6 +4,7 @@
 - Learnt to write [local unit tests for a `ViewModel`](https://developer.android.com/codelabs/basic-android-kotlin-compose-test-viewmodel#0)
     - Write tests as per different paths (Success path, Error Path, Boundary case)
     - Learnt to _run tests with coverage_ and increase the test-coverage
+- Used `AlertDialog` composable
 
 <img src="app_image_1.png" alt="app_image_1" width="250"/>
 <img src="app_image_2.png" alt="app_image_2" width="250"/>
