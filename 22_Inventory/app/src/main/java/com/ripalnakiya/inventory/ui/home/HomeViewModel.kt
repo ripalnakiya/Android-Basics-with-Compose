@@ -1,7 +1,7 @@
 package com.ripalnakiya.inventory.ui.home
 
 import androidx.lifecycle.ViewModel
-import com.ripalnakiya.inventory.data.Item
+import com.ripalnakiya.inventory.data.database.Item
 
 /**
  * ViewModel to retrieve all items in the Room database.

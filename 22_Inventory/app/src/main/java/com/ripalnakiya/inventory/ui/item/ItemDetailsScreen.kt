@@ -37,7 +37,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import com.ripalnakiya.inventory.R
-import com.ripalnakiya.inventory.data.Item
+import com.ripalnakiya.inventory.data.database.Item
 import com.ripalnakiya.inventory.ui.InventoryTopAppBar
 import com.ripalnakiya.inventory.ui.navigation.NavigationDestination
 import com.ripalnakiya.inventory.ui.theme.InventoryTheme

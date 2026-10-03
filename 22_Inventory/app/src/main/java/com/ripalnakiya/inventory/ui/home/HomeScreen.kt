@@ -32,7 +32,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ripalnakiya.inventory.R
-import com.ripalnakiya.inventory.data.Item
+import com.ripalnakiya.inventory.data.database.Item
 import com.ripalnakiya.inventory.ui.InventoryTopAppBar
 import com.ripalnakiya.inventory.ui.item.formatedPrice
 import com.ripalnakiya.inventory.ui.navigation.NavigationDestination

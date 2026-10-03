@@ -1,6 +1,7 @@
 package com.ripalnakiya.inventory.data
 
 import android.content.Context
+import com.ripalnakiya.inventory.data.database.InventoryDatabase
 
 /**
  * App container for Dependency injection.
@@ -12,6 +13,6 @@ interface AppContainer {
 class DefaultAppContainer(private val context: Context) : AppContainer {
 
     override val itemsRepository: ItemsRepository by lazy {
-        OfflineItemsRepository()
+        OfflineItemsRepository(InventoryDatabase.getDatabase(context).itemDao())
     }
 }
