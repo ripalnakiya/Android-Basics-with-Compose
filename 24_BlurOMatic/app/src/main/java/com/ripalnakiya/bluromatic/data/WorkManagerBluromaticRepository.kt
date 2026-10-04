@@ -42,9 +42,14 @@ class WorkManagerBluromaticRepository(context: Context) : BluromaticRepository {
             OneTimeWorkRequest.from(CleanupWorker::class.java)
         )
 
+        val constraints = Constraints.Builder()
+            .setRequiresBatteryNotLow(true)
+            .build()
+
         val blurBuilder = OneTimeWorkRequestBuilder<BlurWorker>()
         blurBuilder.setInputData(createInputDataForWorkRequest(blurLevel, imageUri))
         continuation = continuation.then(blurBuilder.build())
+        blurBuilder.setConstraints(constraints)
 
         val saveWork = OneTimeWorkRequestBuilder<SaveImageToFileWorker>()
             .addTag(TAG_OUTPUT)
