@@ -7,6 +7,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.calculateEndPadding
@@ -18,6 +19,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
@@ -51,6 +53,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.ripalnakiya.bluromatic.R
 import com.ripalnakiya.bluromatic.data.BlurAmount
 import com.ripalnakiya.bluromatic.ui.theme.BlurOMaticTheme
+import androidx.core.net.toUri
 
 @Composable
 fun BluromaticScreen(blurViewModel: BlurViewModel = viewModel(factory = BlurViewModel.Factory)) {
@@ -107,7 +110,9 @@ fun BluromaticScreenContent(
         BlurActions(
             blurUiState = blurUiState,
             onStartClick = { applyBlur(selectedValue) },
-            onSeeFileClick = {},
+            onSeeFileClick = { currentUri ->
+                showBlurredImage(context, currentUri)
+            },
             onCancelClick = { cancelWork() },
             modifier = Modifier.fillMaxWidth()
         )
@@ -136,6 +141,8 @@ private fun BlurActions(
             }
             is BlurUiState.Complete -> {
                 Button(onStartClick) { Text(stringResource(R.string.start)) }
+                Spacer(modifier = Modifier.width(dimensionResource(R.dimen.padding_small)))
+                FilledTonalButton({ onSeeFileClick(blurUiState.outputUri) }) { Text(stringResource(R.string.see_file)) }
             }
         }
     }
@@ -182,11 +189,7 @@ private fun BlurAmountContent(
 }
 
 private fun showBlurredImage(context: Context, currentUri: String) {
-    val uri = if (currentUri.isNotEmpty()) {
-        Uri.parse(currentUri)
-    } else {
-        null
-    }
+    val uri = if (currentUri.isNotEmpty()) currentUri.toUri() else null
     val actionView = Intent(Intent.ACTION_VIEW, uri)
     context.startActivity(actionView)
 }
