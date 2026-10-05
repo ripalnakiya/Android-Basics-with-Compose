@@ -2,6 +2,7 @@
 plugins {
     alias(libs.plugins.android.application) apply false
     id("androidx.navigation.safeargs") version "2.10.2" apply false
+    alias(libs.plugins.compose.compiler) apply false
 }
 buildscript {
     extra.apply {
